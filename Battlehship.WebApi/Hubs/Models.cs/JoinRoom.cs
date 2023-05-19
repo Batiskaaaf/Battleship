@@ -1,0 +1,1 @@
+namespace Battlehship.WebApi.Hubs.Models;

@@ -1,0 +1,11 @@
+global using Microsoft.EntityFrameworkCore;
+global using Battlehship.WebApi.Data.DataAcess;
+global using Battlehship.WebApi.Hubs;
+global using Battlehship.WebApi.Domain.Models;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.AspNetCore.SignalR;
+global using System.ComponentModel.DataAnnotations;
+global using Battlehship.WebApi.Hubs.Models;
+global using Battlehship.WebApi.ViewModels;
+global using System.Collections.Concurrent;
+global using Battleship.Core.Game;
