@@ -1,16 +1,18 @@
 using Battleship.Core;
-using Microsoft.AspNetCore.Mvc.Routing;
+using Battleship.Core.Abstract;
+using Battleship.Core.Game.Models;
+using Battleship.Core.Models;
 
-namespace Battlehship.WebApi.Hubs;
+namespace Battleship.WebApi.Hubs;
 
 public class GameHub : Hub
 {
-    private readonly AppDbContext dbContext;
-    public BattleshipGame game;
-
-    public GameHub(AppDbContext context)
+    public Game game;
+    private readonly IPlayerManager playerManager;
+    
+    public GameHub(IPlayerManager playerManager)
     {
-        this.dbContext = context;
+        this.playerManager = playerManager;
     }
     public async Task JoinRoom(string RoomId, string username)
     {
@@ -28,7 +30,5 @@ public class GameHub : Hub
             game.NextTurn();
         await Clients.Group(game.GroupName).SendAsync("shotProceeded",args);
     }
-
-
 
 }

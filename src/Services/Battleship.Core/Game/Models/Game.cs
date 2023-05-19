@@ -1,14 +1,14 @@
-namespace Battleship.Core.Game;
+namespace Battleship.Core.Game.Models;
 
-public class BattleshipGame
+public class Game
 {
-    public BattleshipPlayer PlayerOne { get; }
-    public BattleshipPlayer PlayerTwo { get; }
-    public BattleshipPlayer CurrentPlayer { get; private set;}
-    public BattleshipPlayer EnemyPlayer => CurrentPlayer == PlayerOne ? PlayerTwo : PlayerOne;
-    public Action<BattleshipPlayer, BattleshipPlayer> OnGameOver;
+    public Board PlayerOne { get; }
+    public Board PlayerTwo { get; }
+    public Board CurrentPlayer { get; private set;}
+    public Board EnemyPlayer => CurrentPlayer == PlayerOne ? PlayerTwo : PlayerOne;
+    public Action<Board, Board> OnGameOver;
     public string GroupName { get; }
-    public BattleshipGame()
+    public Game()
     {
         GroupName = Guid.NewGuid().ToString();
     }
@@ -22,7 +22,7 @@ public class BattleshipGame
             return false;
         return true;
     }
-    public ShotprocessedArgs PlayerShoot(Coordinate coordinate)
+    public ShotProcessedArgs PlayerShoot(Coordinate coordinate)
     {
         var args = EnemyPlayer.ValidateShot(coordinate);
         if(args.ShotStatus == ShotStatus.Miss)
