@@ -1,9 +1,10 @@
-using Battleship.Core.Models;
+using Battleship.Core.HubModels;
 
 namespace Battleship.Core.Abstract;
 
 public interface IPlayerManager
 {
-    Player GetPlayerById(string id);
-    void Create(string id, string name);
+    Player GetByConnectionId(string id);
+    Player GetById(Guid id);
+    Guid Create(string id, string name);
 }

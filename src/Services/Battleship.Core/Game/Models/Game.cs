@@ -2,21 +2,21 @@ namespace Battleship.Core.Game.Models;
 
 public class Game
 {
-    public Board PlayerOne { get; }
-    public Board PlayerTwo { get; }
-    public Board CurrentPlayer { get; private set;}
-    public Board EnemyPlayer => CurrentPlayer == PlayerOne ? PlayerTwo : PlayerOne;
-    public Action<Board, Board> OnGameOver;
-    public string GroupName { get; }
-    public Game()
+    private BattleshipPlayer playerOne;
+    private BattleshipPlayer playerTwo;
+    public BattleshipPlayer CurrentPlayer => isPlayerOneTurn ? playerOne : playerTwo;
+    public BattleshipPlayer EnemyPlayer => isPlayerOneTurn ? playerTwo : playerOne;
+    public Action<BattleshipPlayer, BattleshipPlayer> OnGameOver;
+    private bool isPlayerOneTurn { get; set; }
+    public Game(BattleshipPlayer playerOne, BattleshipPlayer playerTwo)
     {
-        GroupName = Guid.NewGuid().ToString();
+        this.playerOne = playerOne;
+        this.playerTwo = playerTwo;
     }
-    public void NextTurn()
-        => CurrentPlayer = CurrentPlayer == PlayerOne ? PlayerTwo : PlayerOne;
-    public bool PlayerAvailableToShoot(string connectionId, Coordinate coor)
+
+    public bool PlayerIsAllowedToShoot(BattleshipPlayer player, Coordinate coor)
     {
-        if (!IsPlayerTurn(connectionId))
+        if (player != CurrentPlayer)
             return false;
         if (PlayerAlreadyHitSpot(coor))
             return false;
@@ -36,9 +36,8 @@ public class Game
         return args;
     }
 
-
-    private bool IsPlayerTurn(string connectionId)
-        => CurrentPlayer.connectionId == connectionId;
+    private void NextTurn()
+        => isPlayerOneTurn = !isPlayerOneTurn; 
 
     private bool PlayerAlreadyHitSpot(Coordinate coordinate)
         => CurrentPlayer.UsedCoordinates.Any(c => c == coordinate);
