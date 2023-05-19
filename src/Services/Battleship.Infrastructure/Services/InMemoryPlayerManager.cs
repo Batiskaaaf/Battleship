@@ -1,18 +1,24 @@
-using Battleship.Core.Game.Models;
+using Battleship.Core.HubModels;
 
 namespace Battleship.Infrastructure.Services;
 
 public class InMemoryPlayerManager : IPlayerManager
 {
-    private readonly List<Player> players;
+    public List<Player> Players { get; }
     public InMemoryPlayerManager()
     {
-        players = new List<Player>();
+        Players = new List<Player>();
     }
-    public void Create(string id, string name)   
-        => players.Add(new Player(id, name));
-    
-    public Player GetPlayerById(string id)
-        => players.FirstOrDefault(p => p.ConnectionId == id);
+    public Guid Create(string id, string name)   
+    { 
+        var player = new Player(id, name);
+        Players.Add(player);
+        return player.Id;
+    }
+    public Player GetByConnectionId(string connectionId)
+        => Players.FirstOrDefault(p => p.ConnectionId == connectionId);
+
+    public Player GetById(Guid id)
+        => Players.FirstOrDefault(p => p.Id == id);
     
 }

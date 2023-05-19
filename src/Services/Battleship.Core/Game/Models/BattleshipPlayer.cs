@@ -1,17 +1,10 @@
 namespace Battleship.Core.Game.Models;
 
-public class Board
+public abstract class BattleshipPlayer
 {
-    public string Name { get; set; }   
-    public string connectionId { get; set; }
     public bool AreAllShipSunk => Ships.All(s => s.isSunk);
     public List<Coordinate> UsedCoordinates { get; set; }
-    private IEnumerable<Ship> Ships;
-    public Board(string name, IEnumerable<Ship> ships)
-    {
-        Name = name;
-        Ships = ships;
-    }
+    protected IEnumerable<Ship> Ships;
 
     public ShotProcessedArgs ValidateShot(Coordinate coordinate)
     {
