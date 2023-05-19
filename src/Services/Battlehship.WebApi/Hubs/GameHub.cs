@@ -20,12 +20,9 @@ public class GameHub : Hub
     public async Task Fire(Coordinate coordinate)
     {
         var id = Context.ConnectionId;
-        if(!game.IsPlayerTurn(id))
+        if(!game.PlayerAvailableToShoot(id, coordinate))
             await Clients.Caller.SendAsync("forbidenn");
 
-        if(!game.PlayerAlreadyHitSpot(coordinate))
-            await Clients.Caller.SendAsync("forbidenn");
-        
         var args = game.EnemyPlayer.ValidateShot(coordinate);
         if(args.ShotStatus == ShotStatus.Miss)
             game.NextTurn();
