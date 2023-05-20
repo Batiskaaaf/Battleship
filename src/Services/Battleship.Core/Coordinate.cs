@@ -9,7 +9,7 @@ public struct Coordinate
     public Coordinate(int x, int y)
     {
         X = x;
-        Y = Y;
+        Y = y;
     }
 
     public IEnumerable<Coordinate> GetBlockOfCoordinatesAround()
