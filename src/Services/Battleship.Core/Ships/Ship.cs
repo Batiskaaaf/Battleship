@@ -2,12 +2,17 @@ namespace Battleship.Core.Ships;
 
 public class Ship
 {
+    public Ship(ShipType shipType, IEnumerable<Coordinate> coordinates)
+    {
+        this.shipType = shipType;
+        this.Coordinates = coordinates;
+    }
     public ShipType Type { get; set; }
-    private int Length { get; set; }
     private int hits;
-    public List<Coordinate> Coordinates { get; set; } = new List<Coordinate>();
-    public bool isSunk => hits >= Length;
+    private readonly ShipType shipType;
+    public IEnumerable<Coordinate> Coordinates { get; }
+    public bool isSunk => hits >= Coordinates.Count();
     public void Hit(Coordinate coordinate)
         => hits++;
-        
+    
 }

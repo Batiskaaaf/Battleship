@@ -1,6 +1,6 @@
 namespace Battleship.Core.HubModels;
 
-public class GameRoom
+public class GameRoom : BattleshipGame
 {
     private readonly List<Player> players;
     public DateTime CreationDate { get; }
@@ -13,6 +13,7 @@ public class GameRoom
         Name = name;
         Public = isPublic;
         Id = Guid.NewGuid();
+        players = new List<Player>();
     }
 
     public void AddPlayer(Player player)

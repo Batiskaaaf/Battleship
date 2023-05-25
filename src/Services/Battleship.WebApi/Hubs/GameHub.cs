@@ -9,7 +9,7 @@ namespace Battleship.WebApi.Hubs;
 
 public class GameHub : Hub
 {
-    public Game game;
+    public BattleshipGame game;
     private readonly IPlayerManager playerManager;
     private readonly IGameRoomManager gameRoomManager;
     private Player CurrentPlayer => playerManager.GetByConnectionId(Context.ConnectionId);
@@ -56,48 +56,30 @@ public class GameHub : Hub
         await Clients.Group(room.Id.ToString()).SendAsync(Constants.PlayerLeavedLobby, response);
     }
 
-    public async Task SetupBoard(List<Ship> ships)
+    public async Task SetupBoard(IEnumerable<Ship> ships)
     {
-        if(!GameBoardValidator.ValidateBoardForShips(ships))
-        {
-            await Clients.Caller.SendAsync("boardValidationResponse", false);
-            return;
-        }
-        CurrentPlayer.SetShips(ships);
-        await Clients.Caller.SendAsync("boardValidationResponse", true);
+
     }
 
-    public async Task Ready()
+    public async Task isReady(PlayerReadyRequest request)
     {
-        if(!CurrentPlayer.AreShipsSetuped)
-        {
-            var response = new ActionForbidden{Action = nameof(Ready), Reason = Constants.NoShipsOnTheBoard};
-            await Clients.Caller.SendAsync(Constants.ActionForbidden, response);
-        }
-        else
-        {
+        if(request.isReady)
             CurrentPlayer.Ready();
-            var response = new PlayerReadyResponse{isReady = true, PlayerResponse = PlayerResponse.MapFrom(CurrentPlayer)};
-            await Clients.Group(CurrentPlayer.GameRoom.Id.ToString()).SendAsync(Constants.PlayerIsReady, response);
-        }
+        else
+            CurrentPlayer.NotReady();
+        CurrentPlayer.SetShips(request.Ships.Select(x => x.MapToShip()));
+        var response = new PlayerReadyResponce{Player = PlayerResponse.MapFrom(CurrentPlayer), IsReady = true};
+        await Clients.Group(CurrentPlayer.GameRoom.Id.ToString()).SendAsync(Constants.PlayerIsReady, response);
     } 
 
-    public async Task NotReady()
+    public async Task StartGame()
     {
-        CurrentPlayer.NotReady();
-        var response = new PlayerReadyResponse{isReady = false, PlayerResponse = PlayerResponse.MapFrom(CurrentPlayer)};
-        await Clients.Group(CurrentPlayer.GameRoom.Id.ToString()).SendAsync(Constants.PlayerIsReady, response);
+
     }
 
     public async Task Fire(Coordinate coordinate)
     {
-        var id = Context.ConnectionId;
-        if(!game.PlayerIsAllowedToShoot(id, coordinate))
-            await Clients.Caller.SendAsync("forbidenn");
 
-        var args = game.EnemyPlayer.ValidateShot(coordinate);
-        if(args.ShotStatus == ShotStatus.Miss)
-            game.NextTurn();
         //await Clients.Group(game.GroupName).SendAsync("shotProceeded",args);
     }
 

@@ -1,6 +1,6 @@
 namespace Battleship.Core.Game.Models;
 
-public class Game
+public abstract class BattleshipGame
 {
     private BattleshipPlayer playerOne;
     private BattleshipPlayer playerTwo;
@@ -8,7 +8,7 @@ public class Game
     public BattleshipPlayer EnemyPlayer => isPlayerOneTurn ? playerTwo : playerOne;
     public Action<BattleshipPlayer, BattleshipPlayer> OnGameOver;
     private bool isPlayerOneTurn { get; set; }
-    public Game(BattleshipPlayer playerOne, BattleshipPlayer playerTwo)
+    public BattleshipGame(BattleshipPlayer playerOne, BattleshipPlayer playerTwo)
     {
         this.playerOne = playerOne;
         this.playerTwo = playerTwo;

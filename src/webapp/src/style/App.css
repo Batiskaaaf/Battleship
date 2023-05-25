@@ -1,0 +1,211 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+.lobby{
+    display: flex;
+    padding: 5px;
+    border: 1px solid teal;
+    margin-top: 5px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.lobbypage {
+    width: 1600px;
+    height: 800px;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.lobby-row{
+    background-color:#ccc;
+    height: 100%;
+    display: flex;
+    padding: 10px;
+    justify-content: space-around;
+}
+
+.lobby-row-container{
+    height: 100%;
+    width: 100%;
+    margin: 0 10px;
+    border: 1px solid;
+    display: flex;
+    flex-direction: column;
+}
+
+.lobby-configuration{
+    width: 30%;
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+
+.players-info{
+    flex: 0 0 80%;
+    border: 1px solid;
+    margin: 10px;
+}
+
+.buttons{
+    margin: 10px;
+    border: 1px solid;
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ready-button{
+    height: 70%;
+    width: 90%;
+    border: 1px solid teal;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.grid-container{
+    position: relative;
+    flex: 0 0 80%;
+    border: 1px solid;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.cell{
+    width: 54px;
+    height: 54px;
+    background-color: rgba(134, 145, 163, 0.5);
+    margin: 0;
+    padding: 0;
+    z-index: 200;
+    position: absolute;
+    text-align: center;
+}
+
+.ships{
+    display: flex;
+    justify-content: space-around;
+    flex: 1 1 auto;
+    border: 1px solid;
+    margin: 10px;
+    align-items: center;
+}
+
+
+.submarine{
+    width: 53px;
+    height: 54px;
+    background-color: red;
+}
+
+.patrolboat{
+    width: 106px;
+    height: 54px;
+    background-color: blue;
+}
+
+.cruiser{
+    width: 159px;
+    height: 54px;
+    background-color: #45a049;
+}
+
+.battleship{
+    width: 212px;
+    height: 54px;
+    background-color: blueviolet;
+    flex-wrap: wrap;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+input[type="text"],
+input[type="checkbox"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.private-label {
+    display: flex;
+    align-items: center;
+}
+
+.private-checkbox {
+    margin-left: 5px;
+}
+
+.lobbypage__buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #45a049;
+}
+
+.ships-layout{
+    display: flex;
+    width: 550px;
+    height: 550px;
+    position: absolute;
+    z-index: 0;
+    border: 1px solid;
+}
+
+.grid{
+    display: flex;
+    width: 550px;
+    height: 550px;
+    position: absolute;
+    z-index: 100;
+}
+
+.ship{
+    background-color: red;
+    position: absolute;
+    display: inline-block;
+    z-index: 500;
+}

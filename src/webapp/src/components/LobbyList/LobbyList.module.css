@@ -1,0 +1,11 @@
+.lobbylist__lobbiescontainer {
+    margin-top: 10px;
+    max-height: 400px; /* Set the desired height */
+    overflow-y: auto;
+    margin-bottom: 20px;
+  }
+  
+.lobbyListTitle {
+    text-align: center;
+    color: #333;
+}

@@ -1,7 +1,7 @@
 namespace Battleship.WebApi.Hubs.Models;
 
-public class PlayerReadyResponse
+public class PlayerReadyResponce
 {
-    public bool isReady { get; set; }
-    public PlayerResponse PlayerResponse { get; set; }
+    public PlayerResponse Player { get; set; }
+    public bool IsReady { get; set; }
 }

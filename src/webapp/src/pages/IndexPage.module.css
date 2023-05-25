@@ -1,0 +1,26 @@
+.lobbyPageContainer {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .lobbyPageTitle {
+    text-align: center;
+    color: #333;
+  }
+  
+  .createLobbyButton {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .createLobbyButton:hover {
+    background-color: #45a049;
+  }
